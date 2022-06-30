@@ -30,7 +30,7 @@
 进入 `Adachi-BOT/src/plugins` 目录下，执行如下命令
 
 ```bash
-git clone https://github.com/MarryDream/pic_search.git
+git clone https://github.com/KallkaGo/pic_search.git
 ```
 
 或通过本项目仓库左上角 `code -> Download.zip` 下载压缩包，解压至 `Adachi-BOT/src/plugins` 目录内
