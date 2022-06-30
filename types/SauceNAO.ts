@@ -17,7 +17,8 @@ export interface ISauceNAOResult {
 		twitter_user_id?: number
 		twitter_user_handle?: string
 		creator?: string
-		created_at?: string
+		created_at?: string,
+		ext_urls?:string
 	}
 }
 

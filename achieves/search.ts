@@ -33,7 +33,8 @@ const keyToDiy = {
 	user_id: "作者id（pixiv Fanbox）",
 	user_name: "作者（pixiv Fanbox）",
 	publish: "发布日期（pixiv Fanbox）",
-	service_name: "发布地址"
+	service_name: "发布地址",
+	ext_urls:'链接地址'
 }
 
 export async function main( { sendMessage, messageData }: InputParameter ): Promise<void> {
@@ -85,7 +86,7 @@ export async function main( { sendMessage, messageData }: InputParameter ): Prom
 		try {
 			result = await sauceNAOSearch( { api_key, url } );
 		} catch ( e ) {
-			rowMessageArr.push( ErrorMsg.ERROR_MESSAGE );
+			rowMessageArr.push(String(e));
 			continue;
 		}
 		
@@ -116,6 +117,9 @@ export async function main( { sendMessage, messageData }: InputParameter ): Prom
 		/* 生成返回数据对象方法 */
 		const setMessageData = ( data: ISauceNAOResult["data"], key: string, diyKey: string ) => {
 			if ( data[key] && !sendMessageObj[diyKey] ) {
+				if(Array.isArray(data[key])){
+					data[key] = data[key][0]
+				}
 				sendMessageObj[diyKey] = data[key];
 			}
 		}
@@ -132,6 +136,6 @@ export async function main( { sendMessage, messageData }: InputParameter ): Prom
 			rowMessageArr.push( `${ sKey }：${ sendMessageObj[sKey] }` );
 		}
 	}
-	
+	console.log(rowMessageArr)
 	await sendMessage( formatRowMessage( rowMessageArr ) );
 }
